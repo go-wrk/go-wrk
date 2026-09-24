@@ -533,6 +533,9 @@ button:disabled {
   border: 1px solid #263549;
   border-radius: 8px;
   background: #1a2433;
+  /* 明细表里的文字要能选中复制。这里不跟着加 cursor:text —— 点一行是展开
+     详情，光标保持箭头才不会让人以为点了是选文字 */
+  user-select: text;
 }
 
 .rec {
@@ -658,6 +661,9 @@ button:disabled {
   background: #16202e;
   border: 1px solid #263549;
   border-radius: 8px;
+  /* 放开整块，不只是 pre 里的正文 —— 「请求」「响应」这两个小标题和
+     「开始 2026-…」那行时间戳也是要复制的信息 */
+  user-select: text;
 }
 
 .rec-detail h4 {
