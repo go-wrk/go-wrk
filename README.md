@@ -8,7 +8,7 @@ go-wrk-desktop 桌面端 HTTP 压测/基准测试工具。Go + Wails + Vue 3。
 
 ## 下载
 
-Windows 10/11。到 [Releases](/releases/latest) 下最新的 `go-wrk-desktop-v*.exe`，双击运行。
+支持 Windows 10/11。到 [Releases](https://github.com/go-wrk/go-wrk/releases/latest) 页面下载最新的 exe，双击运行。
 
 需要 WebView2 运行时 —— Win11 自带，Win10 可能要先[安装一下](https://developer.microsoft.com/microsoft-edge/webview2/)。
 
