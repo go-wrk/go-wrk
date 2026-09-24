@@ -25,7 +25,6 @@ import {
   formatInt,
   formatMs,
   formatRate,
-  formatTimeShort,
   type Bar,
   type Config,
   type Line,
@@ -505,6 +504,14 @@ const realConcurrency = computed(() => {
   return (s.avgQps * s.avgMs) / 1000
 })
 
+/** 这一轮结束的墙钟时刻，等于开始时刻加上总耗时。
+    跑的过程中还不知道结果，所以只有结束后才有值（0 表示没有）。 */
+const benchEndMs = computed(() => {
+  const s = snap.value
+  if (!benchStartMs.value || !s || running.value) return 0
+  return benchStartMs.value + Math.round(s.elapsed * 1000)
+})
+
 /** 请求数模式的进度。时长模式没有总数这个概念，这张卡不显示。 */
 const progressPct = computed(() => {
   const total = activeCfg.value?.requests ?? 0
@@ -763,10 +770,11 @@ function statusClass(code: string): string {
             <b :class="{ 'accent-red': (snap?.errors ?? 0) > 0 }">{{ formatInt(snap?.errors ?? 0) }}</b>
             <em>{{ n1(errorRate) }}%</em>
           </div>
-          <div class="card wide" title="这一轮从开始到结束的实际时长。">
+          <div class="card wide" title="这一轮从开始到结束的实际时长。结束时刻要等跑完才知道。">
             <label>总耗时</label>
             <b>{{ formatDuration(snap?.elapsed ?? 0) }}</b>
-            <em v-if="benchStartMs">开始于 {{ formatTimeShort(benchStartMs) }}</em>
+            <em v-if="benchStartMs">开始于 {{ formatClock(benchStartMs) }}</em>
+            <em v-if="benchEndMs">结束于 {{ formatClock(benchEndMs) }}</em>
           </div>
         </div>
 

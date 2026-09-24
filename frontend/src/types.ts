@@ -65,20 +65,14 @@ export function formatEdge(ms: number): string {
   return (ms / 1000).toFixed(2) + "s"
 }
 
-/** 把秒数说成「X分Y秒Z毫秒」。 */
+/** 把秒数说成「X分Y秒Z毫秒」。毫秒固定补足三位 —— 压测中它一直在变，
+    不补零的话卡片里那个数字会左右抖。 */
 export function formatDuration(sec: number): string {
   const total = Math.max(0, Math.round(sec * 1000))
   const min = Math.floor(total / 60000)
   const s = Math.floor((total % 60000) / 1000)
-  return `${min}分${s}秒${total % 1000}毫秒`
-}
-
-/** 只要时分秒，不带日期。 */
-export function formatTimeShort(ms: number): string {
-  if (!ms) return "—"
-  const d = new Date(ms)
-  const two = (n: number) => String(n).padStart(2, "0")
-  return `${two(d.getHours())}:${two(d.getMinutes())}:${two(d.getSeconds())}`
+  const ms = String(total % 1000).padStart(3, "0")
+  return `${min}分${s}秒${ms}毫秒`
 }
 
 /** 把 Unix 毫秒格式化成「年月日 时分秒.毫秒」。 */
