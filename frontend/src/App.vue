@@ -383,6 +383,17 @@ function clearRecords() {
   notice.value = "已清空明细"
 }
 
+/**
+ * 点一行展开或收起它的详情。
+ *
+ * 明细节里的文字是可以拖选复制的，而拖选之后松手同样会触发 click ——
+ * 不挡一下的话，想复制个时间戳就会把详情弹出来。
+ */
+function toggleRow(r: RequestRecord) {
+  if (window.getSelection()?.toString()) return
+  openedRecord.value = openedRecord.value?.seq === r.seq ? null : r
+}
+
 /** 从下拉里选一项铺到表单上。 */
 function pickConfig() {
   message.value = ""
@@ -869,7 +880,7 @@ function statusClass(code: string): string {
                 :key="r.seq"
                 class="rec"
                 :class="{ on: openedRecord?.seq === r.seq }"
-                @click="openedRecord = openedRecord?.seq === r.seq ? null : r"
+                @click="toggleRow(r)"
               >
                 <span class="seq">{{ r.seq }}</span>
                 <span class="col-time">{{ formatClock(r.startMs) }}</span>
