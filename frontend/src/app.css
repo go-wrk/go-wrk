@@ -1,0 +1,698 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 顶栏 */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 52px;
+  flex: none;
+  border-bottom: 1px solid #24334a;
+  background: #1a2434;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand h1 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3d4d66;
+}
+
+.dot.live {
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.status {
+  font-size: 12px;
+  color: #8fa3c0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 主体两栏 */
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.panel {
+  padding: 16px 18px;
+}
+
+.config {
+  width: 340px;
+  flex: none;
+  /* 用 scroll 而不是 auto：滚动条一直在，不会因为内容高度变化忽隐忽现 */
+  overflow-y: scroll;
+  border-right: 1px solid #24334a;
+  background: #1a2434;
+}
+
+.results {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* 配置存取 */
+.config-store {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #24334a;
+}
+
+.config-store .row {
+  margin-bottom: 8px;
+}
+
+.config-store .row:last-child {
+  margin-bottom: 0;
+}
+
+button.mini {
+  flex: none;
+  padding: 7px 11px;
+  border-radius: 6px;
+  border: 1px solid #2b3a52;
+  background: transparent;
+  color: #cbd5e1;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+button.mini:hover:not(:disabled) {
+  border-color: #3d4d66;
+  background: #1d2939;
+}
+
+/* 表单 */
+.field {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.field > span {
+  display: block;
+  font-size: 11px;
+  color: #8fa3c0;
+  margin-bottom: 5px;
+}
+
+.field > span em {
+  font-style: normal;
+  color: #5a6b85;
+  margin-left: 6px;
+}
+
+/* 必填标记：左边这一栏里只有目标地址是真必填的 */
+.field > span em.req {
+  color: #f87171;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/* 协议下拉和标题同一行，地址框独占一行 —— 地址往往带路径和查询串，
+   让出下拉占的那 90 多像素很值得。 */
+.field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.field-head > span {
+  display: block;
+  font-size: 11px;
+  color: #8fa3c0;
+}
+
+.field-head > span em {
+  font-style: normal;
+  color: #5a6b85;
+  margin-left: 6px;
+}
+
+.field-head > span em.req {
+  color: #f87171;
+}
+
+.field-head select {
+  flex: none;
+  width: 96px;
+  padding: 2px 4px 2px 7px;
+  font-size: 12px;
+}
+
+.row .field {
+  flex: 1;
+  min-width: 0;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #131c29;
+  border: 1px solid #2b3a52;
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 7px 9px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #3b82f6;
+}
+
+input:disabled {
+  opacity: 0.4;
+}
+
+textarea {
+  resize: vertical;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mt {
+  margin-top: 6px;
+}
+
+.toggle {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #8fa3c0;
+  font-size: 12px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: #cbd5e1;
+}
+
+.advanced {
+  padding: 6px 0 4px;
+  border-top: 1px solid #24334a;
+  margin-bottom: 6px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: #b6c4d8;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.check input {
+  width: auto;
+  accent-color: #3b82f6;
+}
+
+.actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+  position: sticky;
+  bottom: 0;
+  background: #1a2434;
+  padding: 10px 0 2px;
+}
+
+button.primary,
+button.ghost {
+  flex: 1;
+  padding: 9px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #3b82f6;
+  color: #fff;
+}
+
+button.primary:hover:not(:disabled) {
+  background: #2f74e0;
+}
+
+button.ghost {
+  background: transparent;
+  border-color: #2b3a52;
+  color: #cbd5e1;
+  flex: 0 0 88px;
+}
+
+button.ghost:hover:not(:disabled) {
+  border-color: #3d4d66;
+  background: #1d2939;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.message {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #f87171;
+  line-height: 1.5;
+  /* 报错信息要能选中复制走 */
+  user-select: text;
+  cursor: text;
+}
+
+.notice {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #4ade80;
+  line-height: 1.5;
+  word-break: break-all;
+  user-select: text;
+  cursor: text;
+}
+
+/* 指标卡 */
+.cards {
+  display: grid;
+  /* 118px 是让 7 张卡在默认窗口宽度下排成一行的值。12 张普通卡加一张占两格的
+     总耗时正好铺满两行；时长模式下「请求进度」那张不显示，第二行末尾会空一格 */
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+  /* 面板上的数字要能选中复制走 */
+  user-select: text;
+  cursor: text;
+}
+
+.card {
+  background: #1d2939;
+  border: 1px solid #263549;
+  border-radius: 8px;
+  padding: 10px 12px;
+  /* 每张卡都有 title 释义，光标提示一下 */
+  cursor: help;
+}
+
+/* 「0分7秒340毫秒」这种比普通数值长，给它两格 */
+.card.wide {
+  grid-column: span 2;
+}
+
+.card label {
+  display: block;
+  font-size: 11px;
+  color: #7f92ae;
+  margin-bottom: 4px;
+}
+
+.card b {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #e8eef7;
+  line-height: 1.25;
+}
+
+.card em {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: #6b7f9e;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.accent-green {
+  color: #4ade80 !important;
+}
+
+.accent-pink {
+  color: #f472b6 !important;
+}
+
+.accent-red {
+  color: #f87171 !important;
+}
+
+/* 图表块 */
+.chart-block {
+  margin-bottom: 16px;
+}
+
+.chart-block h3 {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8fa3c0;
+  margin: 0 0 6px;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 1100px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 分布列表 */
+.list {
+  /* 和指标卡一样，数字要能选中复制 */
+  user-select: text;
+  cursor: text;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 3px 0;
+  font-size: 12px;
+}
+
+.badge {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  width: 34px;
+  flex: none;
+}
+
+.s2 {
+  color: #4ade80;
+}
+
+.s3 {
+  color: #60a5fa;
+}
+
+.s4 {
+  color: #fbbf24;
+}
+
+.s5 {
+  color: #f87171;
+}
+
+.bar-track {
+  flex: 1;
+  height: 5px;
+  background: #131c29;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: #4ade80;
+  min-width: 2px;
+}
+
+.bar-fill.s3 {
+  background: #60a5fa;
+}
+
+.bar-fill.s4 {
+  background: #fbbf24;
+}
+
+.bar-fill.s5 {
+  background: #f87171;
+}
+
+.num {
+  width: 56px;
+  flex: none;
+  text-align: right;
+  color: #b6c4d8;
+  font-variant-numeric: tabular-nums;
+}
+
+.list-row.error {
+  align-items: flex-start;
+}
+
+.list-row.error .msg {
+  flex: 1;
+  color: #f8a4a4;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.hint {
+  font-size: 12px;
+  color: #4a5a75;
+  margin: 6px 0;
+}
+
+/* 请求明细 */
+.block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.block-head h3 {
+  margin: 0;
+}
+
+.head-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check.inline {
+  padding: 0;
+  gap: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.rec-list {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid #263549;
+  border-radius: 8px;
+  background: #1a2433;
+}
+
+.rec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.rec:last-child {
+  border-bottom: none;
+}
+
+.rec:hover {
+  background: #22304a;
+}
+
+.rec.on {
+  background: #26364f;
+}
+
+/* 列名那行吸在滚动区顶部，滚列表时不会跟着跑掉 */
+.rec-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #1e2b3d;
+  font-size: 11px;
+  cursor: default;
+  border-bottom: 1px solid #263549;
+}
+
+.rec-head:hover {
+  background: #1e2b3d;
+}
+
+.rec.rec-head span {
+  color: #6b7f9e;
+}
+
+.rec .seq {
+  width: 56px;
+  flex: none;
+  padding-right: 4px;
+  text-align: right;
+  color: #6b7f9e;
+}
+
+.rec .col-time {
+  width: 150px;
+  flex: none;
+  color: #8fa3c0;
+}
+
+.rec .code {
+  width: 38px;
+  flex: none;
+  font-weight: 600;
+}
+
+.rec .lat {
+  width: 62px;
+  flex: none;
+  text-align: right;
+  color: #b6c4d8;
+}
+
+.rec .sz {
+  width: 64px;
+  flex: none;
+  text-align: right;
+  color: #8fa3c0;
+}
+
+.rec .tail {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #7f92ae;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 11px;
+}
+
+.rec .tail.bad {
+  color: #f8a4a4;
+}
+
+.s0 {
+  color: #6b7f9e;
+}
+
+/* 状态码首位认不出来时用（后端把 100~599 之外的记作「其它」） */
+.sx {
+  color: #6b7f9e;
+}
+
+.bar-fill.sx {
+  background: #6b7f9e;
+}
+
+.rec-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 1100px) {
+  .rec-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rec-detail .pane {
+  min-width: 0;
+  padding: 10px 12px;
+  background: #16202e;
+  border: 1px solid #263549;
+  border-radius: 8px;
+}
+
+.rec-detail h4 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #8fa3c0;
+}
+
+.rec-detail pre {
+  margin: 0 0 6px;
+  max-height: 170px;
+  overflow-y: auto;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  word-break: break-all;
+  /* 外面的 body 是 user-select:none，这里得放开，不然选不中也就复制不了 */
+  user-select: text;
+  cursor: text;
+}
+
+.rec-detail pre:last-child {
+  margin-bottom: 0;
+}
+
+.rec-detail pre.bad {
+  color: #f8a4a4;
+}
+
+.stamp {
+  margin: 0 0 6px;
+  font-size: 11px;
+  color: #7f92ae;
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,54 @@
+/* 全局样式。组件自己的样式都在 .vue 文件里，这里只放底板和滚动条。 */
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #1b2636;
+  color: #e2e8f0;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
+}
+
+/* 深色滚动条，默认的白色太扎眼 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2b3a52;
+  border-radius: 5px;
+  border: 2px solid #1b2636;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3d4d66;
+}
+
+/* 压测过程里别让用户误选中文本 */
+body {
+  user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+}

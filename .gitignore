@@ -1,0 +1,10 @@
+build/bin
+node_modules
+frontend/dist
+
+# TypeScript 的增量编译缓存。composite 项目跑 tsc 时会生成，
+# 只对生成它的那台机器有意义，换台机器就是废文件。
+*.tsbuildinfo
+
+# go build 直接产出的可执行文件。wails build 的产物在 build/bin/，不在这儿。
+/*.exe
